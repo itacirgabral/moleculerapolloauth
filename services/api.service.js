@@ -1,26 +1,35 @@
 "use strict";
 
-const ApiGateway = require("moleculer-web");
+const ApiGateway 	= require("moleculer-web");
+const { ApolloService } = require("moleculer-apollo-server");
 
 module.exports = {
-	name: "api",
-	mixins: [ApiGateway],
+    name: "api",
 
-	// More info about settings: https://moleculer.services/docs/0.13/moleculer-web.html
-	settings: {
-		port: process.env.PORT || 3000,
+    mixins: [
+        // Gateway
+        ApiGateway,
 
-		routes: [{
-			path: "/api",
-			whitelist: [
-				// Access to any actions in all services under "/api" URL
-				"**"
-			]
-		}],
+        // GraphQL Apollo Server
+        ApolloService({
 
-		// Serve assets from "public" folder
-		assets: {
-			folder: "public"
-		}
-	}
+            // Global GraphQL typeDefs
+            typeDefs: ``,
+
+            // Global resolvers
+            resolvers: {},
+
+            // API Gateway route options
+            routeOptions: {
+                path: "/graphql",
+                cors: true,
+                mappingPolicy: "restrict"
+            },
+
+            // https://www.apollographql.com/docs/apollo-server/v2/api/apollo-server.html
+            serverOptions: {
+                tracing: true,
+            }
+        })
+    ]
 };
