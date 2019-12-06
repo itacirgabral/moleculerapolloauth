@@ -18,7 +18,7 @@ module.exports = {
               mutation: "welcome(name: String!): String"
           },
           handler(ctx) {
-              return `Hello ${ctx.meta.adm ? 'Boss' : 'Dude'}`;
+              return `Hello ${ctx.meta.admin ? 'Boss' : 'Dude'}`;
           }
       }
   }
