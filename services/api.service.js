@@ -20,7 +20,7 @@ module.exports = {
             // https://www.apollographql.com/docs/apollo-server/v2/api/apollo-server.html
             serverOptions: {
                 tracing: true,
-                context: () => {}
+                context: ({ req }) => ({ admin: req.headers.authorization === "admin"})
             }
         })
     ]
