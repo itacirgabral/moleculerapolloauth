@@ -10,6 +10,7 @@ module.exports = {
         ApiGateway,
 
         ApolloService({
+            authorization: true, // ???
             typeDefs: ``,
             resolvers: {},
             routeOptions: {
@@ -17,11 +18,13 @@ module.exports = {
                 cors: true,
                 mappingPolicy: "restrict"
             },
-            // https://www.apollographql.com/docs/apollo-server/v2/api/apollo-server.html
-            serverOptions: {
-                tracing: true,
-                context: ({ req }) => ({ admin: req.headers.authorization === "admin"})
-            }
         })
-    ]
+    ],
+
+    methods: {
+      authorize(ctx, route, req) {
+          console.log("########## AUTHORIZE ##########")
+          return Promise.resolve(() => ({ admin: true }))
+      }
+    }
 };

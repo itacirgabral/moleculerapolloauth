@@ -1,3 +1,5 @@
+let n = 0
+
 module.exports = {
   name: "greeter", 
 
@@ -6,19 +8,9 @@ module.exports = {
           graphql: {
               query: "hello: String"
           },
-          handler(ctx) {
-              return "Hello Moleculer!"
-          }
-      },
-      welcome: {
-          params: {
-              name: "string"
-          },
-          graphql: {
-              mutation: "welcome(name: String!): String"
-          },
-          handler(ctx) {
-              return `Hello ${ctx.meta.admin ? 'Boss' : 'Dude'}`;
+          handler(context) {
+              console.dir(context)
+              return `context.ctx = ${ JSON.stringify(context.ctx)}`
           }
       }
   }
