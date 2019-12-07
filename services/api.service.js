@@ -10,7 +10,7 @@ module.exports = {
         ApiGateway,
 
         ApolloService({
-            authorization: true, // ???
+            authorization: true, // Feature request
             typeDefs: ``,
             resolvers: {},
             routeOptions: {
@@ -23,7 +23,6 @@ module.exports = {
 
     methods: {
       authorize(ctx, route, req) {
-          console.log("########## AUTHORIZE ##########")
           return Promise.resolve(() => ({ admin: true }))
       }
     }
